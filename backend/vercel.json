@@ -1,9 +1,25 @@
 {
-  "version": 2,
+  "services": {
+    "my_frontend": {
+      "root": "frontend/"
+    },
+    "my_backend": {
+      "root": "backend/",
+      "entrypoint": "api/index.js"
+    }
+  },
   "rewrites": [
     {
+      "source": "/api/(.*)",
+      "destination": {
+        "service": "my_backend"
+      }
+    },
+    {
       "source": "/(.*)",
-      "destination": "/api/index"
+      "destination": {
+        "service": "my_frontend"
+      }
     }
   ]
 }
