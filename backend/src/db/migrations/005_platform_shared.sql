@@ -18,6 +18,9 @@ CREATE TABLE IF NOT EXISTS files_metadata (
 CREATE INDEX IF NOT EXISTS idx_files_metadata_org_id ON files_metadata (organization_id);
 CREATE INDEX IF NOT EXISTS idx_files_metadata_uploaded_by ON files_metadata (uploaded_by);
 
+-- Updatable view for files
+CREATE OR REPLACE VIEW files AS SELECT * FROM files_metadata;
+
 -- 2. Notifications
 CREATE TABLE IF NOT EXISTS notifications (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),

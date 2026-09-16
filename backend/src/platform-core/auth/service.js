@@ -2,6 +2,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const db = require('../../config/database');
 const { ROLES, seedRolesForOrg, ROLE_PERMISSIONS } = require('../rbac/permissions');
+const { seedDefaultEntitlements, getEntitlements } = require('../entitlements/service');
 
 const JWT_SECRET = process.env.JWT_SECRET || 'archscale-jwt-default-secret-key-change-in-prod';
 const JWT_EXPIRES_IN = process.env.JWT_EXPIRES_IN || '7d';
@@ -20,7 +21,8 @@ const generateSlug = (name) => {
   return `${base}-${randomSuffix}`;
 };
 
-const register = async ({ orgName, email, password, firstName, lastName }) => {
+const register = async ({ orgName, email, password, firstName, lastName, appCodes }) => {
+
   if (!orgName || !email || !password) {
     const error = new Error('Organization name, email, and password are required');
     error.statusCode = 400;
@@ -51,6 +53,9 @@ const register = async ({ orgName, email, password, firstName, lastName }) => {
 
   // Seed default roles for tenant
   await seedRolesForOrg(organization.id);
+
+  // Seed default entitlements (defaults strictly to ['projects'] unless specified)
+  await seedDefaultEntitlements(organization.id, appCodes || ['projects']);
 
   // Create Admin user
   const userResult = await db.query(
@@ -200,6 +205,14 @@ const getMe = async (userId, organizationId) => {
     // Fall back to default role permissions
   }
 
+  // Resolve tenant entitlements
+  let entitlements = [];
+  try {
+    entitlements = await getEntitlements(organizationId);
+  } catch (err) {
+    console.error(`[Auth Service] Failed to retrieve entitlements for org ${organizationId}:`, err);
+  }
+
   return {
     user: {
       id: user.id,
@@ -212,6 +225,7 @@ const getMe = async (userId, organizationId) => {
     },
     organization,
     permissions,
+    entitlements,
   };
 };
 

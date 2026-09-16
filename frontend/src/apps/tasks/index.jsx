@@ -1,11 +1,7 @@
+// frontend/src/apps/tasks/index.jsx
 import React from 'react';
+import TasksPage from './TasksPage';
 
-// TODO: Implement Tasks app views
 export default function TasksApp() {
-  return (
-    <div>
-      <h2>Tasks App</h2>
-      <p>Module stub for Tasks app.</p>
-    </div>
-  );
+  return <TasksPage />;
 }

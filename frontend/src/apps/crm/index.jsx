@@ -1,11 +1,7 @@
+// frontend/src/apps/crm/index.jsx
 import React from 'react';
+import LeadsPage from './LeadsPage';
 
-// TODO: Implement CRM app views
 export default function CrmApp() {
-  return (
-    <div>
-      <h2>CRM App</h2>
-      <p>Module stub for CRM app.</p>
-    </div>
-  );
+  return <LeadsPage />;
 }

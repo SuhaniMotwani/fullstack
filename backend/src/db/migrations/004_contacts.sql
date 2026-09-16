@@ -1,5 +1,5 @@
 -- Migration 004: Contacts
--- Description: Shared platform contacts directory referenced across apps
+-- Description: Shared platform contacts directory referenced across apps (with soft delete)
 
 CREATE TABLE IF NOT EXISTS contacts (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
@@ -13,12 +13,14 @@ CREATE TABLE IF NOT EXISTS contacts (
   address JSONB DEFAULT '{}'::jsonb,
   metadata JSONB DEFAULT '{}'::jsonb,
   created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+  updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+  deleted_at TIMESTAMPTZ
 );
 
 CREATE INDEX IF NOT EXISTS idx_contacts_org_id ON contacts (organization_id);
 CREATE INDEX IF NOT EXISTS idx_contacts_org_email ON contacts (organization_id, email);
 CREATE INDEX IF NOT EXISTS idx_contacts_company ON contacts (organization_id, company);
+CREATE INDEX IF NOT EXISTS idx_contacts_deleted_at ON contacts (organization_id, deleted_at);
 
 -- Auto-update trigger
 DROP TRIGGER IF EXISTS set_contacts_updated_at ON contacts;

@@ -1,10 +1,1755 @@
+/* frontend/src/index.css - ArchScale Modern Light Glassmorphic Design System */
+
 :root {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-  color: #1a1a1a;
-  background-color: #f9f9fb;
+  --font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-serif: 'Fraunces', 'Playfair Display', Georgia, serif;
+
+  /* Accent Amber (Editorial Moment) */
+  --accent-amber: #f59e0b;
+  --accent-amber-hover: #d97706;
+
+  /* Background & Base */
+  --bg-base: #f4f5f7;
+  --bg-surface: rgba(255, 255, 255, 0.65);
+  --bg-card: rgba(255, 255, 255, 0.62);
+  --bg-card-hover: rgba(255, 255, 255, 0.82);
+  --bg-header: rgba(255, 255, 255, 0.68);
+  --bg-sidebar: rgba(255, 255, 255, 0.65);
+
+  /* Glass Borders */
+  --border-subtle: rgba(0, 0, 0, 0.05);
+  --border-card: rgba(255, 255, 255, 0.85);
+  --border-card-hover: rgba(255, 255, 255, 0.95);
+  --border-input: rgba(0, 0, 0, 0.1);
+  --border-focus: rgba(99, 102, 241, 0.5);
+
+  /* Typography Colors */
+  --text-primary: #0f172a;
+  --text-secondary: #64748b;
+  --text-muted: #94a3b8;
+
+  /* Primary Action CTA (Dark Pill Style) */
+  --btn-primary-bg: #0f172a;
+  --btn-primary-hover: #1e293b;
+  --btn-primary-text: #ffffff;
+
+  /* Color Blobs & Accents */
+  --accent-indigo: #6366f1;
+  --accent-emerald: #10b981;
+  --accent-primary: #6366f1;
+  --accent-primary-hover: #4f46e5;
+  --accent-light: rgba(99, 102, 241, 0.08);
+  --accent-secondary: #3b82f6;
+
+  /* Status Colors */
+  --accent-success: #10b981;
+  --accent-success-light: rgba(16, 185, 129, 0.12);
+  --accent-success-text: #059669;
+
+  --accent-warning: #f59e0b;
+  --accent-warning-light: rgba(245, 158, 11, 0.12);
+  --accent-warning-text: #d97706;
+
+  --accent-danger: #ef4444;
+  --accent-danger-light: rgba(239, 68, 68, 0.12);
+  --accent-danger-text: #dc2626;
+
+  --accent-info: #0284c7;
+  --accent-info-light: rgba(2, 132, 199, 0.12);
+  --accent-info-text: #0284c7;
+
+  --crm-color: #ec4899;
+  --projects-color: #3b82f6;
+  --tasks-color: #10b981;
+  --accounts-color: #8b5cf6;
+
+  /* Glass Shadows */
+  --shadow-sm: 0 2px 6px rgba(0, 0, 0, 0.03);
+  --shadow-md: 0 6px 18px rgba(0, 0, 0, 0.04);
+  --shadow-card: 0 10px 30px -5px rgba(15, 23, 42, 0.04), 0 4px 12px -2px rgba(15, 23, 42, 0.02);
+  --shadow-hover: 0 16px 36px -6px rgba(15, 23, 42, 0.08), 0 6px 14px -3px rgba(15, 23, 42, 0.03);
+  --shadow-pill: 0 4px 14px rgba(15, 23, 42, 0.16);
+  --shadow-pill-hover: 0 6px 20px rgba(15, 23, 42, 0.24);
+
+  /* Radii */
+  --radius-card: 18px;
+  --radius-button: 9999px;
+  --radius-pill: 9999px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-  margin: 0;
-  padding: 0;
+  font-family: var(--font-family);
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* ==============================================================================
+   Ambient Blurred Gradient Color Blobs (Behind Content for Depth)
+   Large, soft, blurred blobs: indigo #6366f1 & emerald #10b981 (blur 80-120px)
+============================================================================== */
+.ambient-glow-blobs {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.glow-blob {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate3d(0, 0, 0);
+  will-change: transform;
+}
+
+.blob-indigo {
+  top: -120px;
+  left: 15%;
+  width: 550px;
+  height: 550px;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.16) 0%, rgba(99, 102, 241, 0.04) 55%, transparent 70%);
+  filter: blur(95px);
+  -webkit-filter: blur(95px);
+}
+
+.blob-emerald {
+  top: 160px;
+  right: 5%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.14) 0%, rgba(16, 185, 129, 0.03) 55%, transparent 70%);
+  filter: blur(105px);
+  -webkit-filter: blur(105px);
+}
+
+.blob-violet {
+  bottom: -100px;
+  left: 32%;
+  width: 480px;
+  height: 480px;
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.11) 0%, rgba(99, 102, 241, 0.02) 55%, transparent 70%);
+  filter: blur(100px);
+  -webkit-filter: blur(100px);
+}
+
+/* Base Body Fallback Glows */
+body::before {
+  content: '';
+  position: fixed;
+  top: -100px;
+  left: 15%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.13), transparent 70%);
+  filter: blur(90px);
+  -webkit-filter: blur(90px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  top: 220px;
+  right: 5%;
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.11), transparent 70%);
+  filter: blur(100px);
+  -webkit-filter: blur(100px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ==============================================================================
+   Typography (Bold, Modern Executive Light Aesthetic)
+============================================================================== */
+h1, h2, h3, h4 {
+  font-family: var(--font-family);
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.025em;
+}
+
+/* Page Headers (32-40px weight 700+) with lighter-weight subtitle */
+.page-hero-title,
+.header-page-title,
+.app-title-group h1,
+.dashboard-hero h1 {
+  font-size: clamp(2rem, 3.2vw, 2.375rem);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  color: #0f172a;
+  line-height: 1.18;
+}
+
+.page-hero-subtitle,
+.header-page-subtitle,
+.app-title-group p,
+.hero-subtext {
+  font-size: 0.9375rem;
+  font-weight: 400;
+  color: var(--text-secondary);
+  margin-top: 0.35rem;
+  line-height: 1.45;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.8125rem;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  color: #334155;
+  padding: 0.18rem 0.45rem;
+  border-radius: 6px;
+}
+
+/* ==============================================================================
+   Buttons (Primary Dark Pill CTA Style & Frosted Glass Secondary Buttons)
+============================================================================= */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--font-family);
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: 0.625rem 1.35rem;
+  border-radius: var(--radius-pill);
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  letter-spacing: -0.01em;
+}
+
+/* Dark pill-shaped button: primary call-to-action style (matching "Start Plan with AI") */
+.btn-primary,
+.btn-dark-pill {
+  background: var(--btn-primary-bg);
+  color: var(--btn-primary-text);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: var(--shadow-pill);
+}
+
+.btn-primary:hover:not(:disabled),
+.btn-dark-pill:hover:not(:disabled) {
+  background: var(--btn-primary-hover);
+  color: #ffffff;
+  transform: translateY(-1.5px);
+  box-shadow: var(--shadow-pill-hover);
+}
+
+.btn-primary:active:not(:disabled),
+.btn-dark-pill:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+/* Warm Amber Pill Button (Login Page Editorial CTA) */
+.btn-amber-pill {
+  background: var(--accent-amber);
+  color: #0f172a;
+  font-weight: 700;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0 4px 14px rgba(245, 158, 11, 0.32);
+}
+
+.btn-amber-pill:hover:not(:disabled) {
+  background: var(--accent-amber-hover);
+  color: #ffffff;
+  transform: translateY(-1.5px);
+  box-shadow: 0 6px 20px rgba(245, 158, 11, 0.42);
+}
+
+.btn-amber-pill:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+/* Frosted glass outline button */
+.btn-outline {
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  color: var(--text-primary);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+}
+
+.btn-outline:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: rgba(203, 213, 225, 0.8);
+  transform: translateY(-1.5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-secondary);
+}
+
+.btn-ghost:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(8px);
+  color: var(--text-primary);
+}
+
+/* Action button success (kept as dark pill or emerald tinted dark pill) */
+.btn-success {
+  background: #0f172a;
+  color: #ffffff;
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.2);
+}
+
+.btn-success:hover:not(:disabled) {
+  background: #1e293b;
+  color: #ffffff;
+  transform: translateY(-1.5px);
+  box-shadow: 0 6px 18px rgba(16, 185, 129, 0.3);
+}
+
+.btn-sm {
+  padding: 0.42rem 0.95rem;
+  font-size: 0.8125rem;
+  border-radius: var(--radius-pill);
+}
+
+.btn-block {
+  width: 100%;
+}
+
+.btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+/* Form Styles with Frosted Input Fields */
+.form-group {
+  margin-bottom: 1.25rem;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 0.45rem;
+}
+
+input[type='text'],
+input[type='email'],
+input[type='password'],
+input[type='number'],
+select {
+  width: 100%;
+  padding: 0.72rem 1rem;
+  font-family: inherit;
+  font-size: 0.875rem;
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  outline: none;
+  transition: all 0.2s ease;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.02);
+}
+
+input:focus, select:focus {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 3.5px rgba(99, 102, 241, 0.18);
+}
+
+/* Alert Messages (Frosted Glass Alerts) */
+.alert {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.85rem 1.15rem;
+  border-radius: 14px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.alert-error {
+  background: rgba(254, 242, 242, 0.85);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  color: var(--accent-danger-text);
+}
+
+.alert-success {
+  background: rgba(236, 253, 245, 0.85);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  color: var(--accent-success-text);
+}
+
+/* ==============================================================================
+   Status Badges (Pill-shaped, glass-tinted background with solid-color text)
+============================================================================== */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.75rem;
+  font-weight: 650;
+  padding: 0.28rem 0.75rem;
+  border-radius: var(--radius-pill);
+  text-transform: capitalize;
+  letter-spacing: 0.015em;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.badge-won,
+.badge-paid,
+.badge-active,
+.badge-completed {
+  background: rgba(16, 185, 129, 0.12);
+  color: #059669;
+  border: 1px solid rgba(16, 185, 129, 0.28);
+}
+
+.badge-proposal,
+.badge-sent,
+.badge-in_progress,
+.badge-multi {
+  background: rgba(99, 102, 241, 0.12);
+  color: #4f46e5;
+  border: 1px solid rgba(99, 102, 241, 0.28);
+}
+
+.badge-lead,
+.badge-draft,
+.badge-planning,
+.badge-priority-medium {
+  background: rgba(245, 158, 11, 0.12);
+  color: #d97706;
+  border: 1px solid rgba(245, 158, 11, 0.28);
+}
+
+.badge-lost,
+.badge-critical,
+.badge-priority-high {
+  background: rgba(239, 68, 68, 0.12);
+  color: #dc2626;
+  border: 1px solid rgba(239, 68, 68, 0.28);
+}
+
+.badge-todo,
+.badge-priority-low,
+.badge-standalone,
+.badge-locked {
+  background: rgba(100, 116, 139, 0.1);
+  color: #475569;
+  border: 1px solid rgba(100, 116, 139, 0.22);
+}
+
+/* ==============================================================================
+   Login Page (Frosted Glass Card over Ambient Blobs)
+============================================================================== */
+.login-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 1.5rem;
+  background-color: var(--bg-base);
+  position: relative;
+}
+
+.login-editorial-card,
+.login-card {
+  width: 100%;
+  max-width: 1060px;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  border-radius: 24px;
+  box-shadow: var(--shadow-card);
+  display: grid;
+  grid-template-columns: 1fr 1.08fr;
+  overflow: hidden;
+  position: relative;
+  z-index: 10;
+}
+
+@media (max-width: 920px) {
+  .login-editorial-card,
+  .login-card {
+    grid-template-columns: 1fr;
+    max-width: 480px;
+  }
+  .login-editorial-col {
+    display: none;
+  }
+}
+
+.login-form-col {
+  padding: 2.75rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.login-editorial-col {
+  padding: 2.75rem 2.5rem;
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.55) 0%, rgba(254, 243, 199, 0.28) 50%, rgba(253, 230, 138, 0.16) 100%);
+  border-left: 1px solid rgba(255, 255, 255, 0.8);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.editorial-header-wrap {
+  margin-bottom: 1.5rem;
+}
+
+.editorial-serif-headline {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 2.75vw, 2.6rem);
+  font-weight: 750;
+  line-height: 1.14;
+  letter-spacing: -0.025em;
+  color: #0f172a;
+  margin-bottom: 0.65rem;
+}
+
+.editorial-accent {
+  color: var(--accent-amber);
+  font-style: italic;
+}
+
+.editorial-subtitle {
+  font-family: var(--font-family);
+  font-size: 0.9375rem;
+  font-weight: 400;
+  color: #64748b;
+  line-height: 1.5;
+}
+
+/* Photo collage layout (2-4 image tiles, mixed square/circular crops, generous rounded corners) */
+.editorial-collage-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  grid-template-rows: auto auto;
+  gap: 1rem;
+  align-items: center;
+}
+
+.collage-tile {
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 24px -4px rgba(15, 23, 42, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.collage-tile:hover {
+  transform: translateY(-2px) scale(1.015);
+}
+
+.collage-tile-main {
+  grid-row: span 2;
+  height: 250px;
+  border-radius: 22px;
+  position: relative;
+}
+
+.collage-tile-circle {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  margin: 0 auto;
+  border: 3px solid rgba(255, 255, 255, 0.95);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
+}
+
+.collage-tile-square {
+  height: 120px;
+  border-radius: 20px;
+}
+
+.collage-tile-tag {
+  margin-top: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.85rem 1.15rem;
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(12px);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #0f172a;
+}
+
+.brand-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.brand-icon {
+  width: 52px;
+  height: 52px;
+  margin: 0 auto 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  background: rgba(99, 102, 241, 0.1);
+  border: 1px solid rgba(99, 102, 241, 0.25);
+  color: var(--accent-primary);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.15);
+}
+
+.brand-title {
+  font-size: 1.75rem;
+  font-weight: 800;
+  margin-bottom: 0.35rem;
+  color: var(--text-primary);
+  letter-spacing: -0.03em;
+}
+
+.brand-subtitle {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.demo-credentials-section {
+  margin-top: 2rem;
+}
+
+.demo-divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin-bottom: 1rem;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 600;
+}
+
+.demo-divider::before,
+.demo-divider::after {
+  content: '';
+  flex: 1;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.demo-divider span {
+  padding: 0 0.75rem;
+}
+
+.demo-buttons-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.demo-btn {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0.8rem 1.15rem;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  transition: all 0.2s ease;
+}
+
+.demo-btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: rgba(99, 102, 241, 0.3);
+  transform: translateY(-1.5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.demo-btn-title {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.demo-btn-desc {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  margin-top: 0.15rem;
+}
+
+/* ==============================================================================
+   Application Shell & Navigation (Frosted Glass Sidebar with Sliding Pill)
+============================================================================== */
+.app-layout {
+  display: flex;
+  min-height: 100vh;
+  position: relative;
+  z-index: 1;
+}
+
+/* Frosted-glass sidebar panel */
+.sidebar {
+  width: 260px;
+  background: var(--bg-sidebar);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-right: 1px solid var(--border-card);
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  box-shadow: 2px 0 20px rgba(0, 0, 0, 0.02);
+  z-index: 30;
+}
+
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 1.6rem 1.4rem 1.35rem;
+}
+
+.brand-logo {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #6366f1, #3b82f6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+}
+
+.brand-name {
+  font-weight: 800;
+  font-size: 1.25rem;
+  color: var(--text-primary);
+  letter-spacing: -0.03em;
+}
+
+/* Sidebar Navigation */
+.sidebar-nav {
+  padding: 0.5rem 0.95rem;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.nav-group-title {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  padding: 1.15rem 0.85rem 0.45rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* Pill-shaped Nav Link */
+.nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 1rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.875rem;
+  font-weight: 550;
+  color: var(--text-secondary);
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-bottom: 0.25rem;
+  position: relative;
+  border: 1px solid transparent;
+}
+
+.nav-link:hover:not(.active) {
+  background: rgba(255, 255, 255, 0.8);
+  color: var(--text-primary);
+  transform: translateX(2px);
+}
+
+/* Pill-shaped active nav item with high contrast & smooth sliding highlight */
+.nav-link.active {
+  background: #0f172a;
+  color: #ffffff;
+  font-weight: 600;
+  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.nav-icon {
+  flex-shrink: 0;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.nav-link.active .nav-icon {
+  color: #ffffff;
+}
+
+/* Sidebar User Dock (Bottom pinned with frosted glass) */
+.sidebar-user-dock {
+  padding: 1rem 1.25rem;
+  border-top: 1px solid var(--border-card);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 0.45);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.user-profile-row {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.avatar-image-circle {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #e0e7ff, #c7d2fe);
+  color: var(--accent-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.875rem;
+  flex-shrink: 0;
+  box-shadow: 0 2px 6px rgba(99, 102, 241, 0.15);
+}
+
+.user-meta-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.user-full-name {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.user-role-text {
+  font-size: 0.6875rem;
+  color: var(--text-secondary);
+}
+
+/* ==============================================================================
+   Main Viewport & Frosted Top Header
+============================================================================== */
+.main-viewport {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  background-color: transparent;
+  position: relative;
+  z-index: 10;
+}
+
+.top-header {
+  height: 74px;
+  background: var(--bg-header);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-card);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2.25rem;
+  position: sticky;
+  top: 0;
+  z-index: 25;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+}
+
+.header-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.header-left .header-page-title {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+}
+
+.header-left .header-page-subtitle {
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  margin-top: 0.15rem;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+}
+
+/* Frosted Date Pill in Top Bar */
+.top-bar-date-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  padding: 0.42rem 0.95rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.8125rem;
+  font-weight: 550;
+  color: var(--text-secondary);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Frosted Organization Badge in Top Bar */
+.top-bar-org-badge {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  padding: 0.42rem 0.95rem;
+  border-radius: var(--radius-pill);
+  box-shadow: var(--shadow-sm);
+}
+
+.top-bar-org-name {
+  font-size: 0.8125rem;
+  font-weight: 650;
+  color: var(--text-primary);
+}
+
+/* Icon Buttons in Top Bar */
+.icon-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s ease;
+}
+
+.icon-btn:hover {
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--text-primary);
+  transform: translateY(-1px);
+}
+
+.content-container {
+  flex: 1;
+  padding: 2.25rem;
+  overflow-y: auto;
+}
+
+/* ==============================================================================
+   Dashboard & Frosted Glass Metric Cards
+============================================================================== */
+.dashboard-view {
+  max-width: 1220px;
+  margin: 0 auto;
+}
+
+/* Dashboard Editorial Welcome Banner (Large Serif Headline & Accent Block) */
+.dashboard-editorial-banner {
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-card);
+  padding: 2.1rem 2.35rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: var(--shadow-card);
+  position: relative;
+  overflow: hidden;
+}
+
+.dashboard-serif-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2.1rem, 3.2vw, 2.75rem);
+  font-weight: 750;
+  color: #0f172a;
+  letter-spacing: -0.025em;
+  line-height: 1.16;
+}
+
+.dashboard-serif-subtitle {
+  font-family: var(--font-family);
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: var(--text-secondary);
+  margin-top: 0.45rem;
+}
+
+.dashboard-banner-accent {
+  width: 210px;
+  height: 105px;
+  border-radius: 18px;
+  overflow: hidden;
+  position: relative;
+  flex-shrink: 0;
+  box-shadow: 0 8px 24px -4px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  background-size: cover;
+  background-position: center;
+}
+
+@media (max-width: 768px) {
+  .dashboard-editorial-banner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .dashboard-banner-accent {
+    width: 100%;
+    height: 90px;
+  }
+}
+
+/* Dashboard Hero Banner (Frosted Glass Card) */
+.dashboard-hero {
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-card);
+  padding: 1.85rem 2.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  box-shadow: var(--shadow-card);
+}
+
+.hero-content h1 {
+  font-size: clamp(1.85rem, 2.5vw, 2.25rem);
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.035em;
+  line-height: 1.2;
+}
+
+.hero-subtext {
+  font-size: 0.9375rem;
+  font-weight: 400;
+  color: var(--text-secondary);
+  margin-top: 0.4rem;
+}
+
+.hero-badge {
+  text-align: right;
+  padding-left: 2rem;
+  border-left: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.hero-badge-title {
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+.hero-badge-value {
+  font-size: 0.95rem;
+  font-weight: 750;
+  color: var(--accent-primary);
+  margin-top: 0.25rem;
+}
+
+/* Summary Metrics Row */
+.metrics-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.35rem;
+  margin-bottom: 2.25rem;
+}
+
+.metric-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-card);
+  padding: 1.6rem 1.5rem;
+  box-shadow: var(--shadow-card);
+  transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 220ms cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.metric-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--border-card-hover);
+}
+
+.metric-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.85rem;
+}
+
+.metric-label {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.metric-icon-circle {
+  padding: 0.45rem;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.metric-value-container {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  margin-bottom: 0.4rem;
+}
+
+.metric-value {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.035em;
+  line-height: 1.1;
+}
+
+.metric-trend {
+  font-size: 0.75rem;
+  font-weight: 650;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  color: var(--accent-success-text);
+}
+
+.metric-subtext {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* Applications Grid */
+.section-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 1.35rem;
+}
+
+.section-header h2 {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.025em;
+}
+
+.section-meta {
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+}
+
+.apps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.35rem;
+  margin-bottom: 2.25rem;
+}
+
+/* Frosted App Cards */
+.app-card {
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-card);
+  padding: 1.65rem;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-card);
+  transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 220ms cubic-bezier(0.16, 1, 0.3, 1), border-color 220ms ease;
+}
+
+.app-card:hover:not(.card-locked) {
+  transform: translateY(-3px);
+  border-color: var(--border-card-hover);
+  box-shadow: var(--shadow-hover);
+}
+
+.card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.1rem;
+}
+
+.card-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.card-accent-crm .card-icon { background: rgba(236, 72, 153, 0.12); color: var(--crm-color); }
+.card-accent-projects .card-icon { background: rgba(59, 130, 246, 0.12); color: var(--projects-color); }
+.card-accent-tasks .card-icon { background: rgba(16, 185, 129, 0.12); color: var(--tasks-color); }
+.card-accent-accounts .card-icon { background: rgba(139, 92, 246, 0.12); color: var(--accounts-color); }
+
+.card-title {
+  font-size: 1.125rem;
+  font-weight: 750;
+  margin-bottom: 0.45rem;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
+.card-desc {
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+  flex: 1;
+}
+
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 1rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--accent-primary);
+}
+
+.card-locked {
+  background: rgba(255, 255, 255, 0.4);
+  opacity: 0.8;
+  border-style: dashed;
+}
+
+.locked-icon {
+  background: rgba(100, 116, 139, 0.1) !important;
+  color: #94a3b8 !important;
+}
+
+.locked-footer {
+  color: var(--text-muted);
+}
+
+/* Pipeline Panel (Frosted Glass Panel) */
+.pipeline-panel {
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-card);
+  padding: 1.85rem;
+  box-shadow: var(--shadow-card);
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  gap: 0.95rem;
+  margin-bottom: 1.6rem;
+}
+
+.panel-icon-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: rgba(99, 102, 241, 0.12);
+  color: var(--accent-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+}
+
+.panel-header h3 {
+  font-size: 1.05rem;
+  font-weight: 750;
+  color: var(--text-primary);
+}
+
+.panel-header p {
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  margin-top: 0.15rem;
+}
+
+.pipeline-steps {
+  display: flex;
+  align-items: center;
+  gap: 0.95rem;
+  flex-wrap: wrap;
+}
+
+.pipeline-step {
+  flex: 1;
+  min-width: 195px;
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  border-radius: 14px;
+  padding: 1.1rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.8rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+}
+
+.step-num {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #0f172a;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.2);
+}
+
+.step-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.step-content strong {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.step-content span {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  margin-top: 0.25rem;
+}
+
+.pipeline-arrow {
+  color: var(--text-muted);
+  font-weight: 700;
+}
+
+/* ==============================================================================
+   Data Tables & Views (Frosted Glass Table Container)
+============================================================================== */
+.app-view {
+  max-width: 1220px;
+  margin: 0 auto;
+}
+
+.app-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.app-title-group {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.app-title-group h1 {
+  font-size: clamp(1.85rem, 2.5vw, 2.25rem);
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.035em;
+}
+
+/* Live Sync Polling Badge */
+.live-pulse-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.28);
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--radius-pill);
+  font-size: 0.75rem;
+  font-weight: 650;
+  color: var(--accent-success-text);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.pulse-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--accent-success);
+  box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  animation: pulse-ring 2s infinite;
+}
+
+@keyframes pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(16, 185, 129, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+  }
+}
+
+.app-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+/* Frosted Glass Data Table */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.875rem;
+}
+
+.data-table th {
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(8px);
+  padding: 0.95rem 1.4rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-secondary);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.data-table td {
+  padding: 1.1rem 1.4rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+  color: var(--text-primary);
+  vertical-align: middle;
+  background-color: transparent;
+}
+
+.data-table tbody tr {
+  transition: background-color 0.15s ease;
+}
+
+.data-table tbody tr:hover td {
+  background-color: rgba(255, 255, 255, 0.45);
+}
+
+.empty-row-td {
+  text-align: center;
+  padding: 3.5rem 1.5rem !important;
+  color: var(--text-muted);
+}
+
+/* Row Flash Highlight Animation on Polling (Preserved) */
+@keyframes row-flash {
+  0% {
+    background-color: rgba(99, 102, 241, 0.22) !important;
+  }
+  100% {
+    background-color: transparent !important;
+  }
+}
+
+.row-flash-highlight td {
+  animation: row-flash 1.5s ease-out forwards;
+}
+
+/* Card Entrance Animation (Preserved) */
+@keyframes card-entrance {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-entrance {
+  animation: card-entrance 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* ==============================================================================
+   Modals (Frosted Glass Dialogs)
+============================================================================== */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+  padding: 1.5rem;
+}
+
+.modal-card {
+  width: 100%;
+  max-width: 540px;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  border-radius: 22px;
+  box-shadow: 0 20px 40px -10px rgba(15, 23, 42, 0.15);
+  overflow: hidden;
+  animation: modal-appear 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes modal-appear {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.modal-header {
+  padding: 1.35rem 1.6rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.modal-header h3 {
+  font-size: 1.18rem;
+  font-weight: 750;
+  color: var(--text-primary);
+}
+
+.modal-close-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.35rem;
+  border-radius: var(--radius-pill);
+  transition: all 0.15s;
+}
+
+.modal-close-btn:hover {
+  color: var(--text-primary);
+  background: rgba(0, 0, 0, 0.05);
+}
+
+.modal-body {
+  padding: 1.65rem;
+  max-height: 75vh;
+  overflow-y: auto;
+}
+
+.modal-footer {
+  padding: 1.15rem 1.6rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.85rem;
+  background: rgba(255, 255, 255, 0.5);
+}
+
+/* Detail Key-Value Grids */
+.detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.35rem;
+  margin-bottom: 1.5rem;
+}
+
+.detail-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.detail-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-secondary);
+  margin-bottom: 0.3rem;
+}
+
+.detail-val {
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+/* ==============================================================================
+   Access Restricted & Loading Views
+============================================================================== */
+.unentitled-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+}
+
+.unentitled-card {
+  max-width: 480px;
+  text-align: center;
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-card);
+  padding: 2.75rem;
+  box-shadow: var(--shadow-card);
+}
+
+.unentitled-icon {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 1.35rem;
+  border-radius: 50%;
+  background: var(--accent-danger-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-danger);
+}
+
+.unentitled-desc {
+  color: var(--text-secondary);
+  font-size: 0.9375rem;
+  margin: 0.75rem 0 1.35rem;
+}
+
+.unentitled-pill {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  margin-bottom: 1.5rem;
+}
+
+.auth-loading-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  gap: 1rem;
+  background: var(--bg-base);
+  position: relative;
+}
+
+.spinner-large {
+  width: 42px;
+  height: 42px;
+  border: 3.5px solid rgba(15, 23, 42, 0.1);
+  border-top-color: #0f172a;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+.loading-text {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
